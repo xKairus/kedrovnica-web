@@ -1,0 +1,96 @@
+.heroSection {
+  position: relative;
+  background-color: var(--color-primary);
+  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                    url('https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=1920&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  padding: 120px 0 160px; 
+  text-align: center;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: 48px;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.heroSubtitle {
+  font-family: var(--font-main);
+  font-size: 18px;
+  font-weight: 300;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  opacity: 0.9;
+}
+
+.advantagesSection {
+  position: relative;
+  z-index: 2;
+  margin-top: -80px; /* Тянем блок вверх на Hero-секцию */
+  margin-bottom: 80px;
+}
+
+.advantagesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Легкая тень */
+}
+
+.advantageCard {
+  padding: 40px 24px;
+  border-right: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.advantageCard:last-child {
+  border-right: none;
+}
+
+.advantageNumber {
+  font-family: var(--font-display);
+  font-size: 120px;
+  color: #f2f2f2; /* Бледная цифра на фоне */
+  position: absolute;
+  top: -20px;
+  left: -10px;
+  line-height: 1;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.advantageContent {
+  position: relative;
+  z-index: 1;
+  margin-top: 40px;
+}
+
+.advantageTitle {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: var(--color-primary);
+  line-height: 1.3;
+}
+
+.advantageText {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .heroTitle { font-size: 32px; }
+  .advantagesGrid { grid-template-columns: 1fr; }
+  .advantageCard { border-right: none; border-bottom: 1px solid #eee; }
+  .advantagesSection { margin-top: 0; } /* На мобилках наезд убираем */
+}
