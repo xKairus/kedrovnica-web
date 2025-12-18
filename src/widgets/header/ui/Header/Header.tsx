@@ -1,7 +1,10 @@
 import { Button } from "@/shared/ui/Button/Button"
+import { useUiStore } from "@/shared/model/useUiStore"
 import s from "./Header.module.css"
 
 export const Header = () => {
+  const { openBookingModal } = useUiStore()
+
   return (
     <header className={s.header}>
       <div className={s.container}>
@@ -24,7 +27,9 @@ export const Header = () => {
           </a>
         </nav>
 
-        <Button variant="outline">Оформить сертификат</Button>
+        <Button variant="outline" onClick={openBookingModal}>
+          Оформить сертификат
+        </Button>
       </div>
     </header>
   )
