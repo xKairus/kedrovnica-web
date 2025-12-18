@@ -1,32 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap");
 
 :root {
   /* --- Цвета --- */
-  --color-primary: #2F3E32; 
-  --color-primary-hover: #3E4F42;
-  --color-text-inverse: #FFFFFF; 
-  
-  --color-accent: #C48F65; 
-  --color-accent-hover: #D69E76;
-  --color-accent-text: #FFFFFF; 
+  --color-primary: #1c4b3a;
+  --color-primary-hover: #3e4f42;
+  --color-text-inverse: #ffffff;
 
-  --color-bg: #F9F7F2; 
-  --color-surface: #FFFFFF;
-  
-  --color-text-main: #2C2C2C;
+  --color-accent: #ce956d;
+  --color-accent-hover: #d69e76;
+  --color-accent-text: #ffffff;
+
+  --color-bg: #f9f7f2;
+  --color-surface: #ffffff;
+
+  --color-text-main: #2c2c2c;
   --color-text-secondary: #666666;
-  
-  --color-error: #E53935;
+
+  --color-error: #e53935;
 
   /* --- Шрифты --- */
-  --font-main: 'Inter', sans-serif;
-  --font-display: 'Playfair Display', serif;
+  --font-main: "Inter", sans-serif;
+  --font-display: "Playfair Display", serif;
 
   /* --- Размеры --- */
   --radius-sm: 8px;
   --radius-md: 16px;
-  --radius-full: 9999px; 
-  
+  --radius-full: 9999px;
+
   --container-width: 1200px;
 }
 
@@ -41,7 +41,12 @@ body {
 }
 
 /* Глобальные заголовки */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
   font-weight: 600;
   color: var(--color-primary);

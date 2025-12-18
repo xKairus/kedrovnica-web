@@ -5,6 +5,7 @@ import { Modal } from "@/shared/ui/Modal/Modal"
 import { BookingWidget } from "@/features/book-appointment/ui/BookingWidget"
 import { useUiStore } from "@/shared/model/useUiStore"
 import { HomePage } from "@/pages/home/ui/HomePage"
+import { ServicesPage } from "@/pages/services/ui/ServicesPage" // <-- Импорт
 
 function App() {
   const { isBookingModalOpen, closeBookingModal } = useUiStore()
@@ -16,6 +17,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/services" element={<ServicesPage />} />{" "}
         </Routes>
       </main>
 

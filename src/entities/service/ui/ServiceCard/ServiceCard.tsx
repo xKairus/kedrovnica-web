@@ -1,36 +1,33 @@
-import { ReactNode } from 'react';
-import { Service } from '../../model/types';
-import s from './ServiceCard.module.css';
+import { ReactNode } from "react"
+import { Service } from "../../model/types"
+import { formatDuration } from "@/shared/lib/formatDuration"
+import s from "./ServiceCard.module.css"
 
 interface ServiceCardProps {
-  service: Service;
-  actionSlot?: ReactNode; // Сюда передадим кнопку
+  service: Service
+  actionSlot?: ReactNode
 }
 
 export const ServiceCard = ({ service, actionSlot }: ServiceCardProps) => {
   return (
     <article className={s.card}>
+      {/* ТЕМНАЯ ШАПКА */}
       <div className={s.header}>
-        <div>
+        <div className={s.headerContent}>
           <h3 className={s.title}>{service.title}</h3>
-          <span className={s.duration}>Продолжительность: {service.duration} мин</span>
+          <div className={s.duration}>
+            Продолжительность: {formatDuration(service.duration)}
+          </div>
         </div>
-        <div className={s.price}>{service.price}₽</div>
+        <div className={s.price}>{service.price} ₽</div>
       </div>
 
+      {/* БЕЛОЕ ТЕЛО */}
       <div className={s.body}>
-        <ul className={s.steps}>
-          {service.steps.map((step, index) => (
-            <li key={index} className={s.step}>
-              {step.name} 
-              {step.duration && <span className={s.durationStep}>({step.duration})</span>}
-            </li>
-          ))}
-        </ul>
-        
-        {/* Место для кнопки */}
-        {actionSlot}
+        <div className={s.description}>{service.description}</div>
+
+        {actionSlot && <div className={s.actions}>{actionSlot}</div>}
       </div>
     </article>
-  );
-};
+  )
+}

@@ -14,8 +14,8 @@ export const HomePage = () => {
       <Hero />
       <Advantages />
       <PromoSection />
-      <SpaMenu />
       <ServicesSection />
+      <SpaMenu />
       <MastersSection />
       <ReviewsSection />
       <SoulSection />
