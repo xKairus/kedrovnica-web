@@ -1,0 +1,71 @@
+.card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  overflow: hidden; /* Чтобы шапка не вылезала за скругления */
+  border: 1px solid #E0E0E0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  background-color: var(--color-primary);
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.title {
+  color: #fff; /* Перебиваем глобальный стиль h3 */
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.duration {
+  font-size: 12px;
+  opacity: 0.8;
+  font-family: var(--font-main);
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.body {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+.step {
+  font-size: 14px;
+  margin-bottom: 10px;
+  padding-left: 14px;
+  position: relative;
+
+  /* Буллит */
+  &::before {
+    content: "•";
+    color: var(--color-accent);
+    position: absolute;
+    left: 0;
+  }
+}
+
+.durationStep {
+  color: #999;
+  font-size: 12px;
+  margin-left: 4px;
+}

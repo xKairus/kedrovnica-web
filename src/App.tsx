@@ -1,28 +1,29 @@
+import { MOCK_MASTERS } from "@/entities/master/model/mock-data"
+import { MasterCard } from "@/entities/master/ui/MasterCard/MasterCard"
+import { MOCK_SERVICES } from "@/entities/service/model/mock-data"
+import { ServiceCard } from "@/entities/service/ui/ServiceCard/ServiceCard"
 import { Button } from "@/shared/ui/Button/Button"
-import { Input } from "@/shared/ui/Input/Input"
 
 function App() {
   return (
-    <div
-      style={{
-        padding: 50,
-        display: "flex",
-        flexDirection: "column",
-        gap: 20,
-        maxWidth: 600,
-      }}
-    >
-      <h1>UI Kit Test</h1>
+    <div style={{ padding: 40, backgroundColor: "#eee" }}>
+      <h2>Тест Мастера</h2>
+      <MasterCard master={MOCK_MASTERS[0]} />
 
-      <div style={{ display: "flex", gap: 10 }}>
-        <Button>Купить сертификат</Button>
-        <Button variant="outline">Подробнее</Button>
+      <h2 style={{ marginTop: 40 }}>Тест Услуги</h2>
+      <div style={{ width: 300 }}>
+        <ServiceCard
+          service={MOCK_SERVICES[0]}
+          actionSlot={
+            <Button variant="outline" style={{ width: "100%" }}>
+              Оформить сертификат
+            </Button>
+          }
+        />
       </div>
-
-      <Input placeholder="Ваше имя" />
-      <Input placeholder="Телефон" error="Неверный формат" />
     </div>
   )
 }
 
 export default App
+
