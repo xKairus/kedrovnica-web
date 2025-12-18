@@ -21,7 +21,7 @@ export const PromoSection = () => {
             душистыми травами.
           </p>
           <Button
-            onClick={openBookingModal}
+            onClick={() => openBookingModal()}
             variant="primary"
             style={{ backgroundColor: "var(--color-accent)" }}
           >

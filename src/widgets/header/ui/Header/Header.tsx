@@ -37,7 +37,7 @@ export const Header = () => {
             Контакты
           </a>
           <div className={s.actions}>
-            <Button variant="outline" onClick={openBookingModal}>
+            <Button variant="outline" onClick={() => openBookingModal()}>
               Оформить сертификат
             </Button>
           </div>
