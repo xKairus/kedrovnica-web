@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
 :root {
   /* --- Цвета --- */
   --color-primary: #2F3E32; 
@@ -5,10 +7,10 @@
   
   --color-accent: #C48F65; 
   --color-accent-hover: #D69E76;
-  --color-accent-text: #FFFFFF;
+  --color-accent-text: #FFFFFF; 
 
   --color-bg: #F9F7F2; 
-  --color-surface: #FFFFFF; 
+  --color-surface: #FFFFFF;
   
   --color-text-main: #2C2C2C;
   --color-text-secondary: #666666;
@@ -20,14 +22,16 @@
 
   /* --- Размеры --- */
   --radius-sm: 8px;
-  --radius-md: 16px; 
+  --radius-md: 16px;
   --radius-full: 9999px; 
   
   --container-width: 1200px;
-  --header-height: 80px;
 }
 
+/* 2. Базовые настройки страницы */
 body {
+  margin: 0;
+  padding: 0;
   background-color: var(--color-bg);
   color: var(--color-text-main);
   font-family: var(--font-main);
@@ -38,4 +42,5 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 600;
   color: var(--color-primary);
+  margin: 0;
 }
