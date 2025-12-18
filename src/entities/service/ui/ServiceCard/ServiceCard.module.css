@@ -1,9 +1,9 @@
 .card {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--color-primary); /* Тонкая рамка цвета шапки */
-  border-radius: 12px; /* Скругление углов */
-  overflow: hidden; /* Чтобы шапка не вылезала за скругление */
+  border: 1px solid var(--color-primary); 
+  border-radius: 12px; 
+  overflow: hidden; 
   height: 100%;
   background-color: #fff;
   transition: transform 0.2s;
@@ -14,15 +14,14 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* --- ШАПКА (Темная) --- */
 .header {
   background-color: var(--color-primary);
   color: #fff;
-  padding: 24px 24px 32px; /* Чуть больше отступ снизу */
+  padding: 24px 24px 32px; 
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  min-height: 100px; /* Чтобы карточки были ровнее */
+  min-height: 100px; 
 }
 
 .headerContent {
@@ -52,14 +51,13 @@
   font-size: 24px;
   font-weight: 700;
   color: #fff;
-  white-space: nowrap; /* Чтобы цена не переносилась */
+  white-space: nowrap; 
   margin-left: 16px;
 }
 
-/* --- ТЕЛО (Белое) --- */
 .body {
   padding: 24px;
-  flex-grow: 1; /* Растягивается, прижимая футер вниз */
+  flex-grow: 1; 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -70,9 +68,9 @@
   line-height: 1.6;
   color: #333;
   margin-bottom: 24px;
-  white-space: pre-wrap; /* Важно для переноса строк в списке */
+  white-space: pre-wrap; 
 }
 
 .actions {
-  margin-top: auto; /* Прижимает кнопку к низу, если контента мало */
+  margin-top: auto; 
 }

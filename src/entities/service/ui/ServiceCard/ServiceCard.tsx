@@ -11,7 +11,6 @@ interface ServiceCardProps {
 export const ServiceCard = ({ service, actionSlot }: ServiceCardProps) => {
   return (
     <article className={s.card}>
-      {/* ТЕМНАЯ ШАПКА */}
       <div className={s.header}>
         <div className={s.headerContent}>
           <h3 className={s.title}>{service.title}</h3>
@@ -22,7 +21,6 @@ export const ServiceCard = ({ service, actionSlot }: ServiceCardProps) => {
         <div className={s.price}>{service.price} ₽</div>
       </div>
 
-      {/* БЕЛОЕ ТЕЛО */}
       <div className={s.body}>
         <div className={s.description}>{service.description}</div>
 

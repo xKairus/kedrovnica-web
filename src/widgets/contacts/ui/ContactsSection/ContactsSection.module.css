@@ -2,12 +2,12 @@
   background-color: var(--color-primary);
   color: #fff;
   padding: 80px 0;
-  border-radius: var(--radius-md) var(--radius-md) 0 0;
 }
 
 .container {
   display: flex;
   gap: 40px;
+
   @media (max-width: 900px) {
     flex-direction: column;
   }
@@ -60,6 +60,6 @@
   flex: 1;
   min-height: 400px;
   background-color: #fff;
-  border-radius: var(--radius-md);
+  border-radius: 10px;
   overflow: hidden;
 }
