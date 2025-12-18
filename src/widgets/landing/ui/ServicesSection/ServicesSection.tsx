@@ -14,8 +14,8 @@ export const ServicesSection = () => {
       <Container>
         <h2 className={s.title}>Популярные программы</h2>
         <div className={s.grid}>
-          {popularServices.map((service) => {
-            const descriptionString = service.steps
+          {popularServices.map((item) => {
+            const descriptionString = item.steps
               .map((step) => {
                 const durationText = step.duration ? ` (${step.duration})` : ""
                 return `• ${step.name}${durationText}`
@@ -24,16 +24,18 @@ export const ServicesSection = () => {
 
             return (
               <ServiceCard
-                key={service.id}
+                key={item.id}
                 service={{
-                  ...service,
+                  ...item,
                   description: descriptionString,
                 }}
                 actionSlot={
                   <Button
                     variant="outline"
                     style={{ width: "100%" }}
-                    onClick={openBookingModal}
+                    onClick={() =>
+                      openBookingModal({ title: item.title, price: item.price })
+                    }
                   >
                     Оформить сертификат
                   </Button>

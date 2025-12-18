@@ -16,7 +16,7 @@ export const Hero = () => {
           Проявить заботу и любовь - легко: <br />
           готовый подарок всего за 10 минут
         </p>
-        <Button onClick={openBookingModal} variant="primary">
+        <Button onClick={() => openBookingModal()} variant="primary">
           Оформить сертификат
         </Button>
       </Container>

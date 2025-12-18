@@ -1,87 +1,160 @@
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { Button } from "@/shared/ui/Button/Button"
-import { Input } from "@/shared/ui/Input/Input"
+import { useState, FormEvent, useEffect, useMemo } from "react"
 import { useUiStore } from "@/shared/model/useUiStore"
+import { Button } from "@/shared/ui/Button/Button"
+import { CATALOG } from "@/pages/services/model/catalog-data"
 import s from "./BookingWidget.module.css"
 
-interface BookingFormValues {
-  name: string
-  phone: string
-  comment?: string
-}
-
 export const BookingWidget = () => {
-  const { closeBookingModal } = useUiStore()
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [submittedName, setSubmittedName] = useState("")
+  const { selectedService, closeBookingModal } = useUiStore()
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<BookingFormValues>()
+  const allServices = useMemo(() => CATALOG.flatMap((cat) => cat.items), [])
 
-  const onSubmit = (data: BookingFormValues) => {
-    console.log("Данные формы:", data)
+  const [name, setName] = useState("")
+  const [phone, setPhone] = useState("")
+  const [message, setMessage] = useState("")
 
-    setSubmittedName(data.name)
-    setIsSubmitted(true)
+  const [currentServiceId, setCurrentServiceId] = useState<string | number>("")
 
-    setTimeout(() => {
-      closeBookingModal()
-      setIsSubmitted(false)
-      setSubmittedName("")
-    }, 2000)
+  const [isLoading, setIsLoading] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+
+  useEffect(() => {
+    if (selectedService) {
+      const found = allServices.find((s) => s.title === selectedService.title)
+      if (found) {
+        setCurrentServiceId(found.id)
+      }
+    } else {
+      setCurrentServiceId("")
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedService])
+
+  const currentService = allServices.find((s) => s.id == currentServiceId)
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/\D/g, "")
+    if (val.startsWith("7") || val.startsWith("8")) val = val.slice(1)
+    val = val.slice(0, 10)
+
+    let formatted = ""
+    if (val.length > 0) formatted += "+7 (" + val.slice(0, 3)
+    if (val.length >= 4) formatted += ") " + val.slice(3, 6)
+    if (val.length >= 7) formatted += "-" + val.slice(6, 8)
+    if (val.length >= 9) formatted += "-" + val.slice(8, 10)
+
+    setPhone(formatted)
   }
 
-  if (isSubmitted) {
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    if (!name || phone.length < 18) {
+      alert("Пожалуйста, заполните имя и корректный телефон")
+      return
+    }
+
+    setIsLoading(true)
+
+    setTimeout(() => {
+      console.log("Заявка:", {
+        service: currentService?.title || "Не выбрана (Консультация)",
+        price: currentService?.price,
+        name,
+        phone,
+        message,
+      })
+      setIsSuccess(true)
+      setIsLoading(false)
+    }, 1000)
+  }
+
+  if (isSuccess) {
     return (
-      <div className={s.successMessage}>
-        <div style={{ fontSize: 40 }}>✅</div>
-        <p>Спасибо, {submittedName}! Мы скоро свяжемся с вами.</p>
+      <div className={s.successContainer}>
+        <div className={s.successIcon}>✓</div>
+        <h3>Заявка принята!</h3>
+        <p>Мы свяжемся с вами в ближайшее время.</p>
+        <Button onClick={closeBookingModal} variant="outline">
+          Закрыть
+        </Button>
       </div>
     )
   }
 
   return (
     <div className={s.container}>
-      <div className={s.header}>
-        <h2 className={s.title}>Запись на сеанс</h2>
-        <p className={s.subtitle}>
-          Оставьте свои данные, и наши администраторы свяжутся с вами для
-          уточнения деталей.
-        </p>
-      </div>
+      <h2 className={s.title}>Запись на сеанс</h2>
 
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          placeholder="Ваше имя"
-          {...register("name", { required: "Пожалуйста, представьтесь" })}
-          error={errors.name?.message}
-        />
+      <p className={s.subtitle}>
+        Оставьте свои контакты, и администратор свяжется с вами для выбора
+        времени.
+      </p>
 
-        <Input
-          placeholder="Телефон"
-          type="tel"
-          {...register("phone", {
-            required: "Нам нужен номер, чтобы позвонить",
-            pattern: {
-              value: /^[0-9+() -]*$/,
-              message: "Некорректный номер телефона",
-            },
-          })}
-          error={errors.phone?.message}
-        />
+      <form onSubmit={handleSubmit} className={s.form}>
+        <div className={s.field}>
+          <label>Выберите программу</label>
+          <select
+            className={s.select}
+            value={currentServiceId}
+            onChange={(e) => setCurrentServiceId(e.target.value)}
+          >
+            <option value="">-- Хочу проконсультироваться --</option>
+            {CATALOG.map((group) => (
+              <optgroup key={group.id} label={group.title}>
+                {group.items.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.title} — {item.price} ₽
+                  </option>
+                ))}
+              </optgroup>
+            ))}
+          </select>
+        </div>
 
-        <Input
-          placeholder="Пожелания (необязательно)"
-          {...register("comment")}
-        />
+        <div className={s.field}>
+          <label>Ваше имя</label>
+          <input
+            type="text"
+            placeholder="Иван"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className={s.input}
+          />
+        </div>
 
-        <Button type="submit" style={{ marginTop: 8 }}>
-          Жду звонка
+        <div className={s.field}>
+          <label>Телефон</label>
+          <input
+            type="tel"
+            placeholder="+7 (999) 000-00-00"
+            value={phone}
+            onChange={handlePhoneChange}
+            className={s.input}
+          />
+        </div>
+
+        <div className={s.field}>
+          <label>Комментарий</label>
+          <textarea
+            placeholder="Желаемая дата, время или вопросы..."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className={s.textarea}
+          />
+        </div>
+
+        <Button
+          type="submit"
+          variant="primary"
+          style={{ width: "100%" }}
+          disabled={isLoading}
+        >
+          {isLoading ? "Отправка..." : "Жду звонка"}
         </Button>
+
+        <p className={s.disclaimer}>
+          Нажимая кнопку, вы даете согласие на обработку персональных данных.
+        </p>
       </form>
     </div>
   )

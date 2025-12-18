@@ -62,7 +62,12 @@ export const ServicesPage = () => {
                       <Button
                         variant="outline"
                         style={{ width: "100%" }}
-                        onClick={openBookingModal}
+                        onClick={() =>
+                          openBookingModal({
+                            title: item.title,
+                            price: item.price,
+                          })
+                        }
                       >
                         Оформить сертификат
                       </Button>

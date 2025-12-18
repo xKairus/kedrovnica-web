@@ -16,7 +16,7 @@ export const SoulSection = () => {
           </h2>
           <p className={s.subtitle}>Ценным, теплым, сердечным</p>
           <Button
-            onClick={openBookingModal}
+            onClick={() => openBookingModal()}
             variant="primary"
             style={{ backgroundColor: "var(--color-accent)" }}
           >
