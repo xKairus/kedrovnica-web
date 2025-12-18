@@ -4,6 +4,7 @@
   /* --- Цвета --- */
   --color-primary: #2F3E32; 
   --color-primary-hover: #3E4F42;
+  --color-text-inverse: #FFFFFF; 
   
   --color-accent: #C48F65; 
   --color-accent-hover: #D69E76;
@@ -14,6 +15,7 @@
   
   --color-text-main: #2C2C2C;
   --color-text-secondary: #666666;
+  
   --color-error: #E53935;
 
   /* --- Шрифты --- */
@@ -38,6 +40,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Глобальные заголовки */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 600;
