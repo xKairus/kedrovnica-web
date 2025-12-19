@@ -48,6 +48,8 @@ export const BookingWidget = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+
+    // Простая валидация
     if (!name || phone.length < 18) {
       alert("Пожалуйста, заполните имя и корректный телефон")
       return
@@ -55,17 +57,37 @@ export const BookingWidget = () => {
 
     setIsLoading(true)
 
-    setTimeout(() => {
-      console.log("Заявка:", {
-        service: currentService?.title || "Не выбрана (Консультация)",
-        price: currentService?.price,
-        name,
-        phone,
-        message,
+    try {
+      // Отправляем данные на нашу функцию
+      const response = await fetch("/api/telegram", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          phone,
+          message,
+          service: currentService?.title || "Не выбрана (Консультация)",
+          price: currentService?.price,
+        }),
       })
-      setIsSuccess(true)
+
+      if (response.ok) {
+        setIsSuccess(true)
+        setName("")
+        setPhone("")
+        setMessage("")
+      } else {
+        console.error("Ошибка сервера")
+        alert("Произошла ошибка при отправке. Пожалуйста, позвоните нам.")
+      }
+    } catch (error) {
+      console.error("Ошибка сети:", error)
+      alert("Не удалось отправить заявку. Проверьте интернет.")
+    } finally {
       setIsLoading(false)
-    }, 1000)
+    }
   }
 
   if (isSuccess) {
